@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('frontend.auth.login');
 });
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('frontend.auth.register');
+Route::post('register', [AuthController::class, 'register'])->name('frontend.auth.login');
 Route::get('/user', [UserController::class, 'index'])->name('backend.user.index');
 Route::get('login', [AuthController::class, 'showFormLogin'])->name('showFormLogin');
 Route::middleware('checkAuth')->group(function (){
