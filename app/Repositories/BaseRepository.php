@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
  use App\Repositories\Impl\BaseInterface;
+ use Illuminate\Support\Facades\DB;
 
  abstract class BaseRepository implements BaseInterface
 {
@@ -18,7 +19,7 @@ namespace App\Repositories;
 
     public function getAll()
     {
-        return $this->model->all();
+        return DB::table($this->model)->get();
     }
 
      public function getById($id)

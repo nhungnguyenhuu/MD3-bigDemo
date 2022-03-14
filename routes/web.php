@@ -12,17 +12,24 @@
 */
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('frontend.auth.login');
+    return view('welcome');
 });
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('frontend.auth.register');
 Route::post('register', [AuthController::class, 'register'])->name('frontend.auth.login');
 Route::get('/user', [UserController::class, 'index'])->name('backend.user.index');
 Route::get('login', [AuthController::class, 'showFormLogin'])->name('showFormLogin');
-Route::middleware('checkAuth')->group(function (){
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
+Route::middleware('checkAuth')->group(function (){
+    Route::prefix('blogs')->group(function (){
+        Route::get('/',[BlogController::class, 'index'])->name('backend.blog.index');
+        Route::get('/create',[BlogController::class, 'create'])->name('backend.blog.create');
+        Route::post('/create',[BlogController::class, 'store'])->name('backend.blog.store');
+    });
 });

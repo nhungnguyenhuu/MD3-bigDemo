@@ -35,15 +35,20 @@ class AuthController extends Controller
     public function showFormLogin()
     {
         if(Auth::check()){
-            return redirect()->route('backend.user.login');
+            return redirect()->route('backend.user.index');
         }
         return view('frontend.auth.login');
     }
 
     public function login(Request $request)
     {
+//        $data =$request->only("email", "password");
+//        if(Auth::attempt($data)){
+//            return redirect()->route('backend.blog.index');
+//        }
+//        return redirect()->back();
         if($this->userService->login($request)){
-            return redirect()->route('backend.user.login');
+            return redirect()->route('backend.blog.index');
         }else{
             return redirect()->back();
         }

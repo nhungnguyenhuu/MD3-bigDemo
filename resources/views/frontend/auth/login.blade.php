@@ -112,16 +112,19 @@
 <body>
 <div class="login-page">
     <div class="form">
-        <form class="register-form">
-            <input type="text" placeholder="name"/>
-            <input type="password" placeholder="password"/>
+        <form class="register-form" action="{{route('frontend.auth.login')}}" method="post">
+            @csrf
+            <input type="text" name="name" placeholder="name"/>
+            <input type="password" name="password" placeholder="password"/>
             <input type="text" placeholder="email address"/>
             <button>create</button>
-            <p class="message">Already registered? <a href="#">Sign In</a></p>
+            <p class="message">Already registered? <a href="{{route('backend.user.index')}}">Sign In</a></p>
         </form>
-        <form class="login-form">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
+
+        <form class="login-form" action="{{route('login')}}" method="post">
+            @csrf
+            <input type="text" name="email" placeholder="username"/>
+            <input type="password" name="password" placeholder="password"/>
             <button>login</button>
             <p class="message">Not registered? <a href="{{route('frontend.auth.register')}}">Create an account</a></p>
         </form>

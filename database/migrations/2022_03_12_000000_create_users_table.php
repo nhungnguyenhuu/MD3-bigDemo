@@ -17,11 +17,9 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-//            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role_id');
+            $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -33,6 +31,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('users');
+        Schema::enableForeignKeyConstraints();
     }
 }

@@ -17,6 +17,7 @@ class UserService
 
     public function login($request)
     {
+
         $data = $request->only('email', 'password');
         if(Auth::attempt($data)){
             return true;
@@ -29,7 +30,7 @@ class UserService
     {
         $data = $request->only('name', 'email', 'password', 'role_id');
         $data["password"] = Hash::make($data["password"]);
-        $user = User::create($data);
+        $user =User::create($request);
         return $user;
     }
 }
